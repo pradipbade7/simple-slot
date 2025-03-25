@@ -109,7 +109,7 @@ const Controls = observer(({ className }) => {
             disabled={!gameStore.canSpin}
           >
             <img
-              src="./src/assets/images/controls/spin.png"
+              src="/controls/spin.png"
               alt="Simple Slot Machine"
               className={`h-24 logo-glow
                 ${gameStore.isSpinning ? 'animate-pulse animate-spin' : ''}
