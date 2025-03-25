@@ -44,7 +44,7 @@ class GameStore {
   maxBet = 100;
 
   // Bet options
-  betOptions = [1, 2, 5, 10, 25];
+  betOptions = [1, 2, 5, 10, 25, 50, 100];
 
   // Add this property to your GameStore class if it doesn't exist:
   winningPositions = []; // 2D array to track which positions are part of winning combinations

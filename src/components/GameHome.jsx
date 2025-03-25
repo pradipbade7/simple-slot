@@ -5,6 +5,9 @@ import Controls from './Controls.jsx';
 import PayTable from './PayTable.jsx';
 import { useGameStore } from '../stores/GameStore.jsx';
 import '../styles/main.css';
+import { PiSpeakerSimpleXFill } from "react-icons/pi";
+import { PiSpeakerSimpleHighFill } from "react-icons/pi";
+
 
 const GameHome = observer(() => {
   const gameStore = useGameStore();
@@ -22,22 +25,38 @@ const GameHome = observer(() => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  {gameStore.lastWin > 0 && (
-    <div className="win-flash absolute inset-0 pointer-events-none"></div>
-  )}
-  
+  {
+    gameStore.lastWin > 0 && (
+      <div className="win-flash absolute inset-0 pointer-events-none"></div>
+    )
+  }
+
 
   return (
     <div className="flex flex-col items-center p-4 min-h-screen game-home">
-      {/* Info button in the top right corner */}
-      <button
-        className="absolute top-4 right-4 w-10 h-10 border-none bg-gradient-to-br from-purple-600 via-purple-700 to-pink-500 hover:from-pink-500 hover:via-purple-700 hover:to-purple-600 text-white rounded-full flex text-center items-center justify-center z-10"
-        onClick={() => setShowPayTable(true)}
-        title="Show Pay Table"
-      >
-        <span className="font-bold">𝓲</span>
 
-      </button>
+      <div className="absolute top-4 right-4 flex space-x-2 z-10">
+        {/* Sound Toggle - mobile */}
+        <button
+          onClick={gameStore.toggleSound}
+          className="w-10 h-10 border-none bg-gradient-to-br from-purple-600 via-purple-700 to-pink-500 hover:from-pink-500 hover:via-purple-700 hover:to-purple-600 text-white rounded-full flex text-center items-center justify-center"
+          aria-label={gameStore.soundEnabled ? "Mute sounds" : "Enable sounds"}
+        >
+          <span>{gameStore.soundEnabled ? <PiSpeakerSimpleHighFill className='text-xl text-white' />
+            : <PiSpeakerSimpleXFill className='text-xl  text-pink-300' />
+          }</span>
+        </button>
+
+        {/* Info button */}
+        <button
+          className="w-10 h-10 border-none bg-gradient-to-br from-purple-600 via-purple-700 to-pink-500 hover:from-pink-500 hover:via-purple-700 hover:to-purple-600 text-white rounded-full flex text-center items-center justify-center"
+          onClick={() => setShowPayTable(true)}
+          title="Show Pay Table"
+        >
+          <span className="font-bold">𝓲</span>
+        </button>
+      </div>
+
 
       <div className="flex justify-center mb-4 h-[10vh]">
         <img
@@ -67,12 +86,12 @@ const GameHome = observer(() => {
           </div>
         </div>
       )}
-    {/* Footer */}
-    <footer className="mt-auto text-center text-sm font-bold text-white">
-      <p>
-      © {new Date().getFullYear()}  All rights reserved. Created by Pradip Bade.
-      </p>
-    </footer>
+      {/* Footer */}
+      <footer className="mt-auto text-center text-sm font-bold text-white">
+        <p>
+          © {new Date().getFullYear()}  All rights reserved. Created by Pradip Bade.
+        </p>
+      </footer>
     </div>
   );
 });
