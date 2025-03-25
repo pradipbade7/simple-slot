@@ -89,7 +89,7 @@ const GameHome = observer(() => {
       {/* Footer */}
       <footer className="mt-auto text-center text-sm font-bold text-white">
         <p>
-          © {new Date().getFullYear()}  Pradip Bade.
+          © {new Date().getFullYear()}  <a className="text-yellow-400" href="https://pradipbade.com" target="_blank" rel="noopener noreferrer">Pradip Bade</a>
         </p>
       </footer>
     </div>
