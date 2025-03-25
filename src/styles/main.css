@@ -1,0 +1,379 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations and styles for the slot machine */
+.game-home {
+  flex: 1;
+  min-height: 100vh;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Create pseudo-element for the blurred background */
+.game-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/background/7.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+/* Add a slight overlay to improve contrast with content */
+.game-home::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+/* Spinning animation for reels */
+.spinning {
+  animation: spin 0.1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-32px); }
+}
+
+/* Win animation */
+.win-flash {
+  animation: winFlash 0.5s ease-in-out 3;
+}
+
+@keyframes winFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Pulse animation for spin button */
+.pulse-btn {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+/* Custom reel styling */
+.reel {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.symbol img {
+  transition: transform 0.3s ease;
+  height: 14vh;
+}
+
+.symbol img:hover {
+  transform: scale(1.1);
+}
+
+/* Styling for the payline */
+.payline {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(252, 211, 77, 0.7);
+  transform: translateY(-50%);
+  z-index: 10;
+  box-shadow: 0 0 10px 2px rgba(252, 211, 77, 0.9);
+}
+
+/* Glowing effect for winning combinations */
+.winning-symbol {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.7));
+  }
+  to {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 1));
+  }
+}
+
+/* Bounce animation for win text */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.win-text {
+  animation: bounce 1s ease infinite;
+}
+
+/* Custom button styles */
+.spin-button {
+  @apply bg-red-600 text-white font-bold px-6 py-3 rounded-full transition-colors duration-200;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 0 #9f1239, 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.spin-button:hover:not(:disabled) {
+  @apply bg-red-700;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #9f1239, 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.spin-button:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.spin-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+  box-shadow: none;
+}
+
+/* Slot machine cabinet styling */
+.slot-machine-cabinet {
+    /* background: url(/background/2.jpeg);
+    background-size: cover; */
+    width: 75%;
+}
+
+.reel-container{
+    width: 20%;
+}
+.bg-reel1{
+    background: linear-gradient(45deg, rgb(231, 67, 114), rgb(255, 50, 150), rgb(120, 40, 200));
+}
+.bg-reel2{
+    background: linear-gradient(180deg, rgb(231, 67, 114), rgb(255, 50, 150), rgb(120, 40, 200));
+}
+.bg-reel3{
+    background: linear-gradient(45deg, rgb(240, 80, 100), rgb(255, 60, 140), rgb(130, 50, 210));
+}
+.bg-reel4{
+    background: linear-gradient(90deg, rgb(235, 70, 120), rgb(255, 80, 160), rgb(110, 30, 190));
+}
+.bg-reel0{
+    background: linear-gradient(-45deg, rgb(220, 60, 110), rgb(250, 100, 180), rgb(100, 40, 220));
+}
+
+
+.bg-controls{
+    background: linear-gradient(45deg, rgb(215 18 240 / 90%), rgba(180, 40, 100, 0.7), rgba(80, 10, 150, 0.9));
+}
+/* Custom backgrounds and textures */
+.wood-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.12'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 20.83l2.83-2.83 1.41 1.41L1.41 22.24H0v-1.41zM0 3.07l2.83-2.83 1.41 1.41L1.41 4.48H0V3.07zm14.17 28.34l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41V3.07zm-7.08 35.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41V3.07zM28.34 38.59l2.83-2.83 1.41 1.41L29.76 40h-1.41v-1.41zM28.34 20.83l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zM28.34 3.07l2.83-2.83 1.41 1.41-2.83 2.83h-1.41V3.07zm-7.08 35.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41v-1.41zm0-17.76l2.83-2.83 1.41 1.41-2.83 2.83h-1.41V3.07z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.metal-bg {
+  background-image: linear-gradient(135deg, #333 25%, #444 25%, #444 50%, #333 50%, #333 75%, #444 75%, #444 100%);
+  background-size: 4px 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .reel {
+    width: 70px;
+    height: 90px;
+  }
+  
+  .symbol img {
+    width: 55px;
+    height: 65px;
+  }
+  
+  .spin-button {
+    @apply px-4 py-2 text-sm;
+  }
+  .slot-machine-cabinet {
+    width: 100%;
+  }
+}
+
+/* Glass effect for premium symbols */
+.premium-symbol {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-symbol::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  transform: rotate(30deg);
+  pointer-events: none;
+}
+
+/* Credits display styling */
+.credits-display {
+  font-family: 'Digital', monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+/* Update confetti positioning */
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: var(--width, 10px);
+  height: var(--height, 20px);
+  background-color: var(--color);
+  opacity: var(--opacity, 0.7);
+  z-index: 1000;
+  animation: fall var(--fall-duration) linear forwards;
+  pointer-events: none;
+  transform-origin: center center;
+}
+
+
+/* Some confetti should be square */
+.confetti.square {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* Some confetti should be circular */
+.confetti.circle {
+  border-radius: 50%;
+}
+
+/* Some confetti should be triangle */
+.confetti.triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* Some confetti should be star shaped */
+.confetti.star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0) rotate(45deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(40vh) rotate(135deg) scale(0.9);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* Add a subtle texture to the background */
+.texture-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Winning symbol animation */
+@keyframes pulse-scale {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.4); filter: brightness(1.5) drop-shadow(0 0 10px gold); }
+  100% { transform: scale(1.2); filter: brightness(1.3) drop-shadow(0 0 5px gold); }
+}
+
+/* Vibration animation for regular symbols */
+@keyframes vibrate {
+  0% { transform: scale(1.2) translate(0, 0) rotate(0); }
+  10% { transform: scale(1.2) translate(-1px, -1px) rotate(-1deg); }
+  20% { transform: scale(1.2) translate(1px, 0) rotate(1deg); }
+  30% { transform: scale(1.2) translate(-1px, 1px) rotate(0); }
+  40% { transform: scale(1.2) translate(1px, 1px) rotate(1deg); }
+  50% { transform: scale(1.2) translate(-1px, -1px) rotate(-1deg); }
+  60% { transform: scale(1.2) translate(-1px, 1px) rotate(0); }
+  70% { transform: scale(1.2) translate(1px, 1px) rotate(-1deg); }
+  80% { transform: scale(1.2) translate(-1px, -1px) rotate(1deg); }
+  90% { transform: scale(1.2) translate(1px, 0) rotate(0); }
+  100% { transform: scale(1.2) translate(0, 0) rotate(0); }
+}
+
+/* Enhanced vibration for premium symbols */
+@keyframes premium-vibrate {
+  0% { transform: scale(1.3) translate(0, 0) rotate(0); filter: brightness(1.3) hue-rotate(0deg); }
+  10% { transform: scale(1.35) translate(-2px, -2px) rotate(-2deg); filter: brightness(1.4) hue-rotate(36deg); }
+  20% { transform: scale(1.3) translate(2px, 0) rotate(2deg); filter: brightness(1.5) hue-rotate(72deg); }
+  30% { transform: scale(1.35) translate(-2px, 2px) rotate(0); filter: brightness(1.4) hue-rotate(108deg); }
+  40% { transform: scale(1.3) translate(2px, 2px) rotate(2deg); filter: brightness(1.3) hue-rotate(144deg); }
+  50% { transform: scale(1.35) translate(-2px, -2px) rotate(-2deg); filter: brightness(1.4) hue-rotate(180deg); }
+  60% { transform: scale(1.3) translate(-2px, 2px) rotate(0); filter: brightness(1.5) hue-rotate(216deg); }
+  70% { transform: scale(1.35) translate(2px, 2px) rotate(-2deg); filter: brightness(1.4) hue-rotate(252deg); }
+  80% { transform: scale(1.3) translate(-2px, -2px) rotate(2deg); filter: brightness(1.3) hue-rotate(288deg); }
+  90% { transform: scale(1.35) translate(2px, 0) rotate(0); filter: brightness(1.4) hue-rotate(324deg); }
+  100% { transform: scale(1.3) translate(0, 0) rotate(0); filter: brightness(1.3) hue-rotate(360deg); }
+}
+
+/* Base winning symbol style */
+.winning-symbol {
+  filter: drop-shadow(0 0 5px gold);
+}
+
+/* Initial scale animation */
+.winning-symbol-animation {
+  animation: pulse-scale 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* Add vibration after the scale animation completes */
+.regular-winning.winning-symbol-animation {
+  animation: 
+    pulse-scale 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards,
+    vibrate 0.6s linear 1.5s infinite;
+}
+
+/* Premium symbols get special animation */
+.premium-winning.winning-symbol-animation {
+  animation: 
+    pulse-scale 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards,
+    premium-vibrate 1s linear 1.5s infinite;
+  filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+}
+
+/* Symbol-specific colors for winning symbols */
+img[alt="cherry"].winning-symbol { filter: drop-shadow(0 0 5px #e74c3c); }
+img[alt="lemon"].winning-symbol { filter: drop-shadow(0 0 5px #f1c40f); }
+img[alt="orange"].winning-symbol { filter: drop-shadow(0 0 5px #e67e22); }
+img[alt="plum"].winning-symbol { filter: drop-shadow(0 0 5px #9b59b6); }
+img[alt="bell"].winning-symbol { filter: drop-shadow(0 0 5px #f39c12); }
+img[alt="seven"].winning-symbol { filter: drop-shadow(0 0 8px gold); }
