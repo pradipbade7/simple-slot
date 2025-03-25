@@ -89,7 +89,7 @@ const GameHome = observer(() => {
       {/* Footer */}
       <footer className="mt-auto text-center text-sm font-bold text-white">
         <p>
-          © {new Date().getFullYear()}  All rights reserved | Created by Pradip Bade.
+          © {new Date().getFullYear()}  Pradip Bade.
         </p>
       </footer>
     </div>
