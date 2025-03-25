@@ -2,7 +2,7 @@
 
 A modern, interactive slot machine game built with React, MobX, and Tailwind CSS.
 
-![Game Screenshot](./public/screenshot.png)
+![Game Screenshot](./public/gamescreen.png)
 
 ## 🎮 Features
 
